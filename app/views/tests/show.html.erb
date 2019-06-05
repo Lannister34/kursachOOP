@@ -1,0 +1,23 @@
+<% provide(:title, @test.title) %>
+<% if logged_in? %>
+<div class="row center-test">
+<div class="col-md-6">
+<h1><%=@test.title%></h1>
+<% if !test_completed?(@user) %>
+ <%= form_with scope: :tests, local: true do |form| %>
+  <% @questions.each do |q| %>
+   <label for="[tests][answers][]"><%= q %></label>
+   <input name="[tests][answers][]" type="text" class='form-control' />
+  <% end %>
+  <% if !@questions.empty? %>
+   <%= form.submit "Завершить", data: { confirm: "Вы уверены? Ответы нельзя будет изменить." }, class: "test btn btn-md btn-default create-theme"  %>
+  <% else %>
+   <h1>Нет вопросов</h1>
+  <% end %>
+ <% end %>
+<% else %>
+<span class="center">Тест пройден. <br /> Ваши баллы: <%= @points %> из <%= @max_points %>. </span>
+<% end %>
+</div>
+</div>
+<% end %>

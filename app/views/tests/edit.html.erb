@@ -1,0 +1,22 @@
+<% provide(:title, 'Создать тест') %>
+<% if logged_in? %>
+<div class="row">
+<div class="col-md-5 center-a">
+<%= form_with scope: :tests, method: "patch", local: true do |form| %>
+ <%= render 'shared/error_tests' %>
+  <p>
+    <%= form.text_field :question, class: 'form-control', placeholder: 'Введите вопрос' %>
+    <%= form.text_field :answer, class: 'form-control', placeholder: 'Введите ответ' %>
+  </p>
+<div class="row">
+ <div class="col-md-8">
+    <%= form.submit "Добавить вопрос", :action => 'next', class: "btn btn-md btn-default create-theme" %>
+ </div>
+ <div class="col-md-4">
+    <%= form.submit "Завершить тест", :action => 'end', class: "btn btn-md btn-default create-theme" %>
+ </div>
+</div>
+<% end %>
+</div>
+</div>
+<% end %>

@@ -1,0 +1,26 @@
+<% provide(:title, 'Пользователи') %>
+    <% if current_user.admin? %>
+     <%= link_to "Создать аккаунт", create_path, class: "create-btn btn btn-md btn-primary" %>
+    <% end %>
+<%= will_paginate %>
+
+<ul class="users">
+  <% @users.each do |user| %>
+    <li>
+      <%= link_to user.name, user %>
+      <% if user.state == false %>
+       <sub>неактивен</sub>
+      <% elsif user.admin? %>
+       <sub>admin</sub>
+      <% end %>
+      <% if current_user.admin? %>
+       <%= link_to "удалить", user, method: :delete,
+                                  data: { confirm: "Вы уверены?" }, class: 'delete-user' %>
+
+      <% end %>
+    </li>
+   <% end %>
+</ul>
+
+<%= will_paginate %>
+

@@ -1,0 +1,38 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-lg-4">
+    <section class="user_info">
+      <h1>
+        <% if @user.state %>
+         <%= gravatar_for @user %>
+        <% end %>
+        <%= @user.name %>
+ <% if !@user.state %>
+
+      <span class="code">Пригласительный код: <%= @user.code %></span>
+
+    <% end %>
+      </h1>
+   
+    </section>
+  </aside>
+  <div class="col-lg-6 text-center">
+  <% if !@user.themes.empty? && !@user.admin? %>
+   <table class="user">
+    <tr class="table-name">
+       <td class="left"> Предмет </td>
+       <td class="right"> Балл </td>
+      </tr>
+    <% @themes.each do |theme| %>
+     <% theme.each do |key, val| %>
+      <tr>
+       <td class="left"> <%= key %> </td>
+       <td class="right"> <%= val %> </td>
+      </tr>
+     <% end %>
+    <% end %>
+   </table>
+  <% end %>
+  </div>
+</div>
+

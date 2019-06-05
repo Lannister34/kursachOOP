@@ -1,0 +1,9 @@
+<% provide(:title, @lecture.title) %>
+<% if current_user.admin? %>
+<div><%= link_to "Редактировать", edit_article_path, class:"btn btn-default" %></div>
+<div class="del"><%= link_to "Удалить", @lecture, method: :delete,
+                                  data: { confirm: "Вы уверены?" }, class:"btn btn-default" %></div>
+<% end %>
+<h1><%= @lecture.title %> </h1>
+
+<p> <%= simple_format(@lecture.text) %> </p>

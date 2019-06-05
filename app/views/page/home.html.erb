@@ -1,0 +1,36 @@
+<% if logged_in? %>
+  <% if current_user.admin? %>
+<div class="row">
+<div class="col-md-3">
+<%= form_with scope: :page, local: true do |form| %>
+ <%= render 'shared/error_for_page' %>
+  <p>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Введите название темы' %>
+
+    <%= form.submit "Создать тему", class: "btn btn-md btn-default create-theme" %>
+<% end %>
+</div>
+</div>
+  <% end %>
+<div class="row"
+<div class="themes-list list-group col-md-3">
+  <% @themes.each do |theme| %>
+      <%= link_to theme.title, theme, class:"list-group-item list-group-item-action list-group-item-info" %>
+ 
+  <% end %>
+</div>
+</div>
+
+
+
+        <% else %>
+<div class="center jumbotron">
+  <h1>Добро пожаловать!</h1>
+  <h2>
+    Для начала работы войдите в свой аккаунт или зарегистрируйтесь.
+  </h2>
+  
+   <%= link_to "Войти", login_path, class: "btn btn-lg btn-primary" %>
+   <%= link_to "Зарегистрироваться", signup_path, class: "btn btn-lg btn-primary" %>
+</div>
+<% end %>

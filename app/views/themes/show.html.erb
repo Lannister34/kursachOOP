@@ -1,0 +1,45 @@
+<% provide(:title, @theme.title) %>
+<% if logged_in? %>
+    <% if current_user.admin? %>
+<div class="row">
+<div class="col-md-3">
+ <p>
+    <%= link_to "Добавить лекцию", create_lecture_path, class: "list-group-item btn btn-md btn-default" %>
+ </p>
+ <p>
+    <%= link_to "Добавить тест", create_test_path(:theme => @theme.title), class: "list-group-item btn btn-md btn-default" %>
+ </p>
+</div>
+</div>
+    <% end %>
+<div class="row">
+<div class="themes-list list-group col-lg-12">
+  <h2 class="h2-themes">Лекции:</h2>
+  <% @a = 0 %>
+  <% @lectures.each do |lecture| %>
+      <% if check_theme(lecture.theme, @theme.title) %>
+      <%= link_to lecture.title, lecture, class:"list-group-item list-group-item-action list-group-item-info" %>
+      <% @a = 1 %>
+      <% end %>
+  <% end %>
+  <% if @a == 0 %>
+   <h1 class="h1-themes">Лекции отсутствуют</h1>
+  <% end %>
+</div>
+</div>
+<div class="row">
+<div class="themes-list list-group col-lg-12">
+  <h2 class="h2-themes">Тесты:</h2>
+  <% @b = 0 %>
+  <% @tests.each do |test| %>
+      <% if check_theme(test.theme, @theme.title) %>
+      <%= link_to test.title, test, class:"list-group-item list-group-item-action list-group-item-info" %>
+      <% @b = 1 %>
+      <% end %>
+  <% end %>
+  <% if @b == 0 %>
+   <h1 class="h1-themes">Тесты отсутствуют</h1>
+  <% end %>
+</div>
+</div>
+<% end %>

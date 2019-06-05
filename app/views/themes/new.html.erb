@@ -1,0 +1,18 @@
+<% provide(:title, 'Создать лекцию') %>
+<% if logged_in? %>
+<div class="row">
+<div class="col-md-5 center-a">
+<%= form_with scope: :themes, local: true do |form| %>
+ <%= render 'shared/error_articles' %>
+  <p>
+    <%= form.text_field :title, class: 'form-control', placeholder: 'Введите название лекции' %>
+
+    <%= form.text_area :area, class: 'form-control', placeholder: 'Введите содержание' %>
+
+    <%= form.file_field :file  %>  
+
+    <%= form.submit "Создать лекцию", class: "btn btn-md btn-default create-theme" %>
+<% end %>
+</div>
+</div>
+<% end %>

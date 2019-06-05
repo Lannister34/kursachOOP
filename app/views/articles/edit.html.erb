@@ -1,0 +1,16 @@
+<% provide(:title, 'Редактировать лекцию') %>
+<% if logged_in? %>
+<div class="row">
+<div class="col-md-5 center-a">
+<%= form_with scope: :articles, method: :patch, local: true do |form| %>
+ <%= render 'shared/error_articles' %>
+  <p>
+    <%= form.text_field :title, class: 'form-control', value: @lecture.title, placeholder: 'Введите название лекции' %>
+
+    <%= form.text_area :area, class: 'form-control', value: @lecture.text, placeholder: 'Введите содержание' %>  
+
+    <%= form.submit "Подтвердить изменения", class: "btn btn-md btn-default create-theme" %>
+<% end %>
+</div>
+</div>
+<% end %>
