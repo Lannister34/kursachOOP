@@ -1,15 +1,18 @@
 class User < ApplicationRecord
  attr_accessor :remember_token
- before_save { if !self.email.nil? 
-self.email = email.downcase 
-end }
- VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i 
+ before_save {
+   if !self.email.nil?
+    self.email = email.downcase
+   end
+ }
+
+ VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }, on: :log
  has_secure_password
  validates :password, presence: true, length: { minimum: 6 }, :allow_nil => true, on: :log
  validates :code, presence: true
 
-validates :name, presence: true, on: :create
+validates :name, presence: true, on: :create, length: { maximum: 50 }
 validates :code, presence: true, uniqueness: { case_sensitive: true }
 
 serialize :rates, Array

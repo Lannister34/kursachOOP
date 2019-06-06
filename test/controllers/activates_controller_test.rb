@@ -4,6 +4,6 @@ class ActivatesControllerTest < ActionDispatch::IntegrationTest
   test "should get signup" do
     get '/signup'
     assert_response :success
-    assert_select "title", "Регистрация | Education ONPU"
+    assert_select "title", "Регистрация | #{@base_title}"
   end
 end
